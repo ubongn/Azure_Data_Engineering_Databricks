@@ -138,21 +138,8 @@ df = pd.DataFrame({
 # Map status_code to full words using a dictionary
 # Add an "amount_tier" column: "high" if > 1000, "medium" if > 200, "low" otherwise
 
-df["name"] = df["name"].str.strip().str.title()
-df["email_domain"] = df["email"].str.split("@").str[1]
-
-status_map = {
-    "comp": "completed",
-    "ship": "shipped",
-    "canc": "cancelled",
-}
-df["status"] = df["status_code"].map(status_map)
-
-df["amount_tier"] = np.select(
-    [df["amount"] > 1000, df["amount"] > 200],
-    ["high", "medium"],
-    default="low",
-)
+df["name"] = df["name"].str.strip()
+df["email"] = df["email"].str.split("@").str[1]
 
 
 
